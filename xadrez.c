@@ -39,14 +39,13 @@ void moverRainha() {
 
 void moverCavaloL() {
     printf("Cavalo (Baixo + Esquerda - com FOR + WHILE):\n");
-
-    for (int i = 0; i < 2; i++) { // 2 movimentos para Baixo
+    for (int i = 0; i < 2; i++) {
         printf("Baixo\n");
-        int j = 0;
-        while (j < 1) {           // 1 movimento para Esquerda por iteração
-            printf("Esquerda\n");
-            j++;
-        }
+    }
+    int j = 0;
+    while (j < 1) {
+        printf("Esquerda\n");
+        j++;
     }
     printf("\n");
 }
@@ -72,21 +71,21 @@ void moverRainhaRecursiva(int passos) {
 }
 
 void moverCavaloL_Mestre() {
-    printf("Cavalo Mestre (2 Cima, 1 Direita - com FOR + condições múltiplas):\n");
-
-    // Movimento vertical: 2 passos para cima
+    printf("Cavalo Mestre (2 Cima, 1 Direita - com FOR + múltiplas condições):\n");
+    int passosCima = 0;
+    int passosDireita = 0;
     for (int i = 0; i < 3; i++) {
-        if (i == 2) break; // só queremos 2 "Cima"
-        printf("Cima\n");
+        if (passosCima < 2) {
+            printf("Cima\n");
+            passosCima++;
+            continue;
+        }
+        if (passosDireita < 1) {
+            printf("Direita\n");
+            passosDireita++;
+            break;
+        }
     }
-
-    // Movimento horizontal: 1 para direita com continue e break
-    for (int j = 0; j < 2; j++) {
-        if (j == 1) continue; // ignora se for o segundo
-        printf("Direita\n");
-        break; // garante apenas UM "Direita"
-    }
-
     printf("\n");
 }
 
