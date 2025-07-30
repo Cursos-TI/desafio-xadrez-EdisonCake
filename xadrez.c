@@ -1,56 +1,57 @@
 #include <stdio.h>
 
-// Constantes para número de movimentos
+// Constantes
 #define MOV_BISPO 5
 #define MOV_TORRE 5
 #define MOV_RAINHA 8
 
-// ---------------- NÍVEL NOVATO ----------------
-
-void moverBispo() {
-    printf("♗ Movimentação do Bispo (Diagonal Superior Direita):\n");
-    for (int i = 0; i < MOV_BISPO; i++) {
-        printf("Cima + Direita\n");
-    }
-    printf("\n");
-}
+// ----------- NÍVEL NOVATO (cada loop diferente) -----------
 
 void moverTorre() {
-    printf("♖ Movimentação da Torre (Direita):\n");
+    printf("Torre (Direita - com FOR):\n");
     for (int i = 0; i < MOV_TORRE; i++) {
         printf("Direita\n");
     }
     printf("\n");
 }
 
-void moverRainha() {
-    printf("♕ Movimentação da Rainha (Esquerda):\n");
-    for (int i = 0; i < MOV_RAINHA; i++) {
-        printf("Esquerda\n");
+void moverBispo() {
+    printf("Bispo (Diagonal Cima + Direita - com WHILE):\n");
+    int i = 0;
+    while (i < MOV_BISPO) {
+        printf("Cima + Direita\n");
+        i++;
     }
     printf("\n");
 }
 
-// ---------------- NÍVEL AVENTUREIRO ----------------
+void moverRainha() {
+    printf("Rainha (Esquerda - com DO-WHILE):\n");
+    int i = 0;
+    do {
+        printf("Esquerda\n");
+        i++;
+    } while (i < MOV_RAINHA);
+    printf("\n");
+}
+
+// ----------- NÍVEL AVENTUREIRO (Cavalo com loops aninhados) -----------
 
 void moverCavaloL() {
-    printf("♘ Movimentação do Cavalo em L (Baixo + Esquerda):\n");
+    printf("Cavalo (Baixo + Esquerda - com FOR + WHILE):\n");
 
-    for (int i = 0; i < 2; i++) { // Cavalo anda 2 para uma direção
+    for (int i = 0; i < 2; i++) { // 2 movimentos para Baixo
         printf("Baixo\n");
         int j = 0;
-        while (j < 1) {           // E depois 1 para a outra
+        while (j < 1) {           // 1 movimento para Esquerda por iteração
             printf("Esquerda\n");
             j++;
         }
     }
-
     printf("\n");
 }
 
-// ---------------- NÍVEL MESTRE ----------------
-
-// Funções recursivas para movimentação simples
+// ----------- NÍVEL MESTRE (Recursividade + Cavalo com lógica complexa) -----------
 
 void moverBispoRecursivo(int passos) {
     if (passos == 0) return;
@@ -71,46 +72,48 @@ void moverRainhaRecursiva(int passos) {
 }
 
 void moverCavaloL_Mestre() {
-    printf("♘ Movimentação Avançada do Cavalo (L para cima e direita):\n");
+    printf("Cavalo Mestre (2 Cima, 1 Direita - com FOR + condições múltiplas):\n");
 
-    for (int i = 2; i > 0; i--) {
-        if (i == 1) continue; // pula o segundo passo na vertical
+    // Movimento vertical: 2 passos para cima
+    for (int i = 0; i < 3; i++) {
+        if (i == 2) break; // só queremos 2 "Cima"
         printf("Cima\n");
+    }
 
-        for (int j = 0; j < 2; j++) {
-            if (j == 1) break; // só executa um passo na horizontal
-            printf("Direita\n");
-        }
+    // Movimento horizontal: 1 para direita com continue e break
+    for (int j = 0; j < 2; j++) {
+        if (j == 1) continue; // ignora se for o segundo
+        printf("Direita\n");
+        break; // garante apenas UM "Direita"
     }
 
     printf("\n");
 }
 
-// ---------------- MAIN ----------------
+// ----------- MAIN -----------
 
 int main() {
-    printf("Desafio de Xadrez - MateCheck\n\n");
+    printf("Desafio de Xadrez - Nível Mestre Completo\n\n");
 
     // Nível Novato
-    moverBispo();
     moverTorre();
+    moverBispo();
     moverRainha();
 
     // Nível Aventureiro
     moverCavaloL();
 
     // Nível Mestre
-    printf("♜ Versão Mestre com Recursividade:\n");
-    printf("\n♗ Bispo:\n");
-    moverBispoRecursivo(MOV_BISPO);
-
-    printf("\n♖ Torre:\n");
+    printf("Recursividade - Torre:\n");
     moverTorreRecursiva(MOV_TORRE);
 
-    printf("\n♕ Rainha:\n");
+    printf("\nRecursividade - Bispo:\n");
+    moverBispoRecursivo(MOV_BISPO);
+
+    printf("\nRecursividade - Rainha:\n");
     moverRainhaRecursiva(MOV_RAINHA);
 
-    printf("\n♘ Cavalo com múltiplas condições:\n");
+    printf("\nCavalo Mestre com condições especiais:\n");
     moverCavaloL_Mestre();
 
     return 0;
